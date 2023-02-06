@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/rest-countries/static/js/main.eb461560.js",
+    "main.js": "/rest-countries/static/js/main.2a5be830.js",
     "index.html": "/rest-countries/index.html",
-    "main.eb461560.js.map": "/rest-countries/static/js/main.eb461560.js.map"
+    "main.2a5be830.js.map": "/rest-countries/static/js/main.2a5be830.js.map"
   },
   "entrypoints": [
-    "static/js/main.eb461560.js"
+    "static/js/main.2a5be830.js"
   ]
 }
