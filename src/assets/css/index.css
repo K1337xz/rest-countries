@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
 * {
   box-sizing: border-box;
   padding: 0;
@@ -21,6 +22,7 @@
 body {
   width: 100%;
   height: 100vh;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 #root {
@@ -37,6 +39,9 @@ body {
   padding: 2rem;
   background-color: var(--element);
   color: var(--text);
+}
+.mainNav h1 {
+  font-weight: 800;
 }
 
 .container {
@@ -55,10 +60,16 @@ body {
 }
 .container .countriesWrapper .card {
   width: 85%;
-  height: 50vh;
+  height: 100%;
   box-shadow: 0px 3px 32px 12px rgba(0, 0, 0, 0.35);
   background-color: var(--element);
   color: var(--text);
+}
+.container .countriesWrapper .card h3 {
+  font-weight: 800;
+}
+.container .countriesWrapper .card p {
+  font-weight: 400;
 }
 .container .countriesWrapper .card .cardContent {
   display: flex;
@@ -83,4 +94,30 @@ body {
 .mainForm label input[type=text] {
   width: 35%;
   height: 5vh;
+  background-color: var(--element);
+  border: none;
+  outline: none;
+  padding-left: 3rem;
+  color: var(--text);
+  border-radius: 5px;
+  box-shadow: 0px 3px 17px 5px rgba(0, 0, 0, 0.35);
+}
+.mainForm select {
+  cursor: pointer;
+  margin-left: 2rem;
+  padding-left: 1rem;
+  background-color: var(--element);
+  color: var(--text);
+  width: 13%;
+  height: 6vh;
+  border: none;
+  outline: none;
+}
+
+.raz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=index.css.map */

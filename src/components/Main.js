@@ -1,33 +1,69 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import Countries from "./Countries";
 
-export default function Main(props) {
-	const [countriesItems, setCountriesItems] = React.useState([]);
-	const [url, setUrl] = React.useState({
-		urlAll: "https://restcountries.com/v3.1/all",
-	});
+export default function Main() {
+	const [allCountries, setAllCountires] = React.useState([]);
+	const [clickedCountry, setClickedCountry] = React.useState([]);
+	const [isActive, setIsActive] = React.useState(false);
+	const url = `https://restcountries.com/v3.1/`;
 
-	function selectRegion(event) {
-		let selectRegion = event.target.value;
-		url.urlAll = `https://restcountries.com/v3.1/region/${selectRegion}`;
-	}
 	React.useEffect(() => {
-		const fetchData = async () => {
-			const result = await axios(url.urlAll);
-			setCountriesItems(result.data);
-		};
-		fetchData();
-	}, [selectRegion]);
-	const elements = countriesItems.map((item, idx) => {
+		getAllCountries();
+	}, []);
+
+	const getAllCountries = async () => {
+		try {
+			const response = await axios.get(`${url}all`);
+			const data = response.data;
+			setAllCountires(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	async function getOneContry(id) {
+		setIsActive((prevVal) => !prevVal);
+		const url = `https://restcountries.com/v3.1/alpha/`;
+		try {
+			const response = await axios.get(`${url}/${id}`);
+			const data = response.data;
+			setClickedCountry(data);
+			console.log(clickedCountry);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const oneElement = clickedCountry.map((item) => {
+		const { currencies } = item;
 		return (
 			<Countries
-				key={idx}
+				isActive={isActive}
+				key={item.cca2}
+				src={item.flags.svg}
+				nameCountry={item.name.common}
+				countryPopulation={item.population}
+				countrySub={item.subregion}
+				countryRegion={item.region}
+				countryCapital={item.capital}
+				countryDomain={item.tld}
+				toggleClick={() => getOneContry(item.cca2)}
+			/>
+		);
+	});
+
+	const cardElement = allCountries.map((item) => {
+		return (
+			<Countries
+				isActive={isActive}
+				key={item.cca2}
 				src={item.flags.svg}
 				nameCountry={item.name.common}
 				countryPopulation={item.population}
 				countryRegion={item.region}
 				countryCapital={item.capital}
+				toggleClick={() => getOneContry(item.cca2)}
 			/>
 		);
 	});
@@ -36,9 +72,17 @@ export default function Main(props) {
 			<div className="topSearchForm">
 				<form className="mainForm">
 					<label htmlFor="searchCountry">
-						<input type="text" id="searchCountry" />
+						{isActive ? (
+							<input type="submit" id="goBack" value="Go Back!" />
+						) : (
+							<input
+								type="text"
+								id="searchCountry"
+								placeholder="Search for Country..."
+							/>
+						)}
 					</label>
-					<select name="selectRegion" onChange={selectRegion}>
+					<select name="selectRegion">
 						<option
 							value="filterByRegion"
 							style={{ display: "none" }}
@@ -53,7 +97,9 @@ export default function Main(props) {
 					</select>
 				</form>
 			</div>
-			<div className="countriesWrapper">{elements}</div>
+			<div className="countriesWrapper">
+				{isActive ? oneElement : cardElement}
+			</div>
 		</main>
 	);
 }
