@@ -6,7 +6,11 @@ export default function Navbar(props) {
 			<nav className="mainNav">
 				<h1>Where in the world?</h1>
 				<label htmlFor="themeSwitcher">
-					<input type="checkbox" id="themeSwitcher" />
+					<input
+						type="checkbox"
+						id="themeSwitcher"
+						onChange={props.themeSwitcher}
+					/>
 					Darkmode
 				</label>
 			</nav>
