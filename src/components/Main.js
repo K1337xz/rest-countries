@@ -6,6 +6,7 @@ export default function Main() {
 	const [allCountries, setAllCountires] = React.useState([]);
 	const [clickedCountry, setClickedCountry] = React.useState([]);
 	const [isActive, setIsActive] = React.useState(false);
+
 	const url = `https://restcountries.com/v3.1/`;
 
 	React.useEffect(() => {
@@ -29,26 +30,42 @@ export default function Main() {
 			const response = await axios.get(`${url}/${id}`);
 			const data = response.data;
 			setClickedCountry(data);
-			console.log(clickedCountry);
+			console.log(data.borders);
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
 	const oneElement = clickedCountry.map((item) => {
-		const { currencies } = item;
+		const currencies = Object.values(item.currencies);
+		const nativeName = Object.values(item.name.nativeName);
+		const languages = Object.values(item.languages);
+		/* const borders = Object.values(item.borders); */
+		const activeCard = {
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			width: "55%",
+		};
+
 		return (
 			<Countries
 				isActive={isActive}
 				key={item.cca2}
 				src={item.flags.svg}
 				nameCountry={item.name.common}
+				countryNativeName={nativeName[0].official}
 				countryPopulation={item.population}
 				countrySub={item.subregion}
 				countryRegion={item.region}
 				countryCapital={item.capital}
 				countryDomain={item.tld}
-				toggleClick={() => getOneContry(item.cca2)}
+				countryCurriences={currencies[0].name}
+				countryLanguages={languages.join(",")}
+				countryBorders={
+					item.borders && Object.values(item.borders).join(" , ")
+				}
+				style={activeCard}
 			/>
 		);
 	});
@@ -97,7 +114,11 @@ export default function Main() {
 					</select>
 				</form>
 			</div>
-			<div className="countriesWrapper">
+			<div
+				className={
+					isActive ? "countriesWrapper auto" : "countriesWrapper"
+				}
+			>
 				{isActive ? oneElement : cardElement}
 			</div>
 		</main>

@@ -11,7 +11,7 @@ export default function Navbar(props) {
 						id="themeSwitcher"
 						onChange={props.themeSwitcher}
 					/>
-					Darkmode
+					LightMode
 				</label>
 			</nav>
 		</header>
