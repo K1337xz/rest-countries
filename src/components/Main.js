@@ -5,13 +5,15 @@ import Countries from "./Countries";
 export default function Main() {
 	const [allCountries, setAllCountires] = React.useState([]);
 	const [clickedCountry, setClickedCountry] = React.useState([]);
+	const [regionCountry, setRegionCountry] = React.useState([]);
 	const [isActive, setIsActive] = React.useState(false);
-
+	/* 	const [filter, setFilter] = React.useState(false);
+	 */
 	const url = `https://restcountries.com/v3.1/`;
 
 	React.useEffect(() => {
 		getAllCountries();
-	}, []);
+	}, [isActive]);
 
 	const getAllCountries = async () => {
 		try {
@@ -35,6 +37,36 @@ export default function Main() {
 			console.log(error);
 		}
 	}
+
+	async function filterByReg(e) {
+		const { value } = e.target;
+		/* 		setFilter((prevVal) => !prevVal); */
+		try {
+			const response = await axios.get(`${url}region/${value}`);
+			const data = response.data;
+			setAllCountires(data);
+		} catch (error) {}
+	}
+
+	function goBack(e) {
+		e.preventDefault();
+		setIsActive((prevVal) => !prevVal);
+	}
+
+	const filtredElements = regionCountry.map((item) => {
+		return (
+			<Countries
+				isActive={isActive}
+				key={item.cca2}
+				src={item.flags.svg}
+				nameCountry={item.name.common}
+				countryPopulation={item.population}
+				countryRegion={item.region}
+				countryCapital={item.capital}
+				toggleClick={() => getOneContry(item.cca2)}
+			/>
+		);
+	});
 
 	const oneElement = clickedCountry.map((item) => {
 		const currencies = Object.values(item.currencies);
@@ -90,7 +122,9 @@ export default function Main() {
 				<form className="mainForm">
 					<label htmlFor="searchCountry">
 						{isActive ? (
-							<input type="submit" id="goBack" value="Go Back!" />
+							<button id="goBack" onClick={goBack}>
+								Go Back!
+							</button>
 						) : (
 							<input
 								type="text"
@@ -99,19 +133,25 @@ export default function Main() {
 							/>
 						)}
 					</label>
-					<select name="selectRegion">
-						<option
-							value="filterByRegion"
-							style={{ display: "none" }}
+					{!isActive && (
+						<select
+							name="selectRegion"
+							defaultValue="filter"
+							onChange={(e) => filterByReg(e)}
 						>
-							Filter by Region
-						</option>
-						<option value="africa">Africa</option>
-						<option value="america">America</option>
-						<option value="asia">Asia</option>
-						<option value="europe">Europe</option>
-						<option value="oceania">Oceania</option>
-					</select>
+							<option
+								value="filterByRegion"
+								style={{ display: "none" }}
+							>
+								Filter by Region
+							</option>
+							<option value="africa">Africa</option>
+							<option value="america">America</option>
+							<option value="asia">Asia</option>
+							<option value="europe">Europe</option>
+							<option value="oceania">Oceania</option>
+						</select>
+					)}
 				</form>
 			</div>
 			<div
