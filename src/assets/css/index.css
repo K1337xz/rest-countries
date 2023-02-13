@@ -110,7 +110,7 @@ body {
 }
 .container .countriesWrapper .topImg img {
   width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.103);
+  border-bottom: 4px solid rgba(53, 52, 52, 0.1);
 }
 .container .countriesWrapper .active {
   display: flex;
@@ -130,6 +130,17 @@ body {
   justify-content: space-between;
   padding: 2rem;
 }
+.mainForm #goBack {
+  width: 8%;
+  height: 4vh;
+  background-color: var(--element);
+  outline: none;
+  border: none;
+  color: var(--text);
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.35);
+}
 .mainForm label {
   width: 80%;
 }
@@ -142,7 +153,6 @@ body {
   padding-left: 3rem;
   color: var(--text);
   border-radius: 5px;
-  box-shadow: 0px 3px 17px 5px rgba(0, 0, 0, 0.35);
 }
 .mainForm select {
   cursor: pointer;

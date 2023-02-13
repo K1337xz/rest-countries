@@ -40,12 +40,16 @@ export default function Main() {
 
 	async function filterByReg(e) {
 		const { value } = e.target;
-		/* 		setFilter((prevVal) => !prevVal); */
 		try {
 			const response = await axios.get(`${url}region/${value}`);
 			const data = response.data;
 			setAllCountires(data);
 		} catch (error) {}
+	}
+
+	function searchCountry(e) {
+		const url = `https://restcountries.com/v3.1/alpha/`;
+		console.log(e.target.value);
 	}
 
 	function goBack(e) {
@@ -123,13 +127,14 @@ export default function Main() {
 					<label htmlFor="searchCountry">
 						{isActive ? (
 							<button id="goBack" onClick={goBack}>
-								Go Back!
+								Back!
 							</button>
 						) : (
 							<input
 								type="text"
 								id="searchCountry"
 								placeholder="Search for Country..."
+								onChange={searchCountry}
 							/>
 						)}
 					</label>
