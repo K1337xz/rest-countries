@@ -44,12 +44,30 @@ export default function Main() {
 			const response = await axios.get(`${url}region/${value}`);
 			const data = response.data;
 			setAllCountires(data);
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
-	function searchCountry(e) {
-		const url = `https://restcountries.com/v3.1/alpha/`;
-		console.log(e.target.value);
+	async function searchCountry(e) {
+		const url = `https://restcountries.com/v3.1/name/`;
+		let inpVal = e.target.value;
+		try {
+			if (inpVal < 0) {
+				const response = await axios.get(
+					`https://restcountries.com/v3.1/all`
+				);
+				const data = response.data;
+				setAllCountires(data);
+			} else {
+				const response = await axios.get(`${url}${inpVal}`);
+				const data = response.data;
+				setAllCountires(data);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		console.log(`${url}${inpVal}`);
 	}
 
 	function goBack(e) {
