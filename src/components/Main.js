@@ -107,7 +107,7 @@ export default function Main() {
 			<Countries
 				isActive={isActive}
 				key={item.cca2}
-				alt={item.flags.alt}
+				alt={item.flags.alt && "Flag image"}
 				src={item.flags.svg}
 				nameCountry={item.name.common}
 				countryNativeName={nativeName[0].official}
