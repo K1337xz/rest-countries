@@ -80,6 +80,7 @@ export default function Main() {
 			<Countries
 				isActive={isActive}
 				key={item.cca2}
+				alt={item.flags.alt}
 				src={item.flags.svg}
 				nameCountry={item.name.common}
 				countryPopulation={item.population}
@@ -106,6 +107,7 @@ export default function Main() {
 			<Countries
 				isActive={isActive}
 				key={item.cca2}
+				alt={item.flags.alt}
 				src={item.flags.svg}
 				nameCountry={item.name.common}
 				countryNativeName={nativeName[0].official}
@@ -130,6 +132,7 @@ export default function Main() {
 				isActive={isActive}
 				key={item.cca2}
 				src={item.flags.svg}
+				alt={item.flags.alt}
 				nameCountry={item.name.common}
 				countryPopulation={item.population}
 				countryRegion={item.region}
