@@ -11,7 +11,7 @@ export default function Countries(props) {
 			</div>
 			{props.isActive ? (
 				<div className="cardContent">
-					<h3>{props.nameCountry}</h3>
+					<h1>{props.nameCountry}</h1>
 					<div className="cardContemtWrapperr">
 						<div className="topC">
 							<p>
@@ -60,7 +60,7 @@ export default function Countries(props) {
 				</div>
 			) : (
 				<div className="cardContent">
-					<h3>{props.nameCountry}</h3>
+					<h1>{props.nameCountry}</h1>
 					<p>
 						Population: <span>{props.countryPopulation}</span>
 					</p>
