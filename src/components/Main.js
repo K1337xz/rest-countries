@@ -164,7 +164,7 @@ export default function Main() {
 					</label>
 					{!isActive && (
 						<select
-							name="selectRegion"
+							name="selectRegions"
 							defaultValue="filter"
 							onChange={(e) => filterByReg(e)}
 						>
