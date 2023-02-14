@@ -7,7 +7,7 @@ export default function Countries(props) {
 			onClick={props.toggleClick}
 		>
 			<div className={props.isActive ? "active" : "topImg"}>
-				<img src={props.src} alt="Flag Img" />
+				<img src={props.src} alt={props.alt} />
 			</div>
 			{props.isActive ? (
 				<div className="cardContent">

@@ -76,11 +76,12 @@ export default function Main() {
 	}
 
 	const filtredElements = regionCountry.map((item) => {
+		const altImg = item.flags.alt;
 		return (
 			<Countries
 				isActive={isActive}
 				key={item.cca2}
-				alt={item.flags.alt}
+				alt={altImg ? altImg : "Flag img"}
 				src={item.flags.svg}
 				nameCountry={item.name.common}
 				countryPopulation={item.population}
@@ -92,6 +93,7 @@ export default function Main() {
 	});
 
 	const oneElement = clickedCountry.map((item) => {
+		const altImg = item.flags.alt;
 		const currencies = Object.values(item.currencies);
 		const nativeName = Object.values(item.name.nativeName);
 		const languages = Object.values(item.languages);
@@ -107,7 +109,7 @@ export default function Main() {
 			<Countries
 				isActive={isActive}
 				key={item.cca2}
-				alt={item.flags.alt && "Flag image"}
+				alt={altImg ? altImg : "Flag img"}
 				src={item.flags.svg}
 				nameCountry={item.name.common}
 				countryNativeName={nativeName[0].official}
@@ -127,12 +129,13 @@ export default function Main() {
 	});
 
 	const cardElement = allCountries.map((item) => {
+		const altImg = item.flags.alt;
 		return (
 			<Countries
 				isActive={isActive}
 				key={item.cca2}
 				src={item.flags.svg}
-				alt={item.flags.alt}
+				alt={altImg ? altImg : "Flag img"}
 				nameCountry={item.name.common}
 				countryPopulation={item.population}
 				countryRegion={item.region}
